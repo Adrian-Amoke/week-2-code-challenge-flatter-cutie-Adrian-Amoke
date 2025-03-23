@@ -11,15 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //This will fetch characters and fill the character bar
     fetch('http://localhost:3000/characters')
-    .then((res) => res.json())
-    .then((characters) => {
-        characters.forEach((character) => {
-            const span = document.createElement('span');
-            span.textContent = character.name;
-            span.addEventListener('click', () => displayCharacter(character));
-            characterBar.appendChild(span);
+        .then((res) => res.json())
+        .then((characters) => {
+            characters.forEach((character) => {
+                const span = document.createElement('span');
+                span.textContent = character.name;
+                span.addEventListener('click', () => displayCharacter(character));
+                characterBar.appendChild(span);
+            });
         });
-    });
     //This displays the character details
     function displayCharacter(character) {
         currentCharacter = character;
@@ -30,16 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
     //Handles vote submission
     voteForm.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        const votesToAdd = parseInt(voteInput.value) || 0;
+        const votesAdd = parseInt(voteInput.value) || 0;
         if (currentCharacter) {
-            currentCharacter.votes += votesToAdd;
+            currentCharacter.votes += votesAdd;
             voteCount.textContent = currentCharacter.votes;
             voteInput.value = '';
         }
     });
     // Handles reset votes
     resetBtn.addEventListener('click', () => {
-        if(currentCharacter) {
+        if (currentCharacter) {
             currentCharacter.votes = 0;
             voteCount.textContent = 0;
         }
